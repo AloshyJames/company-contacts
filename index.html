@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Company Contacts</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 15px;
+        }
+
+        #search {
+            width: 100%;
+            padding: 14px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .contact {
+            background: white;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .contact h3 {
+            margin-top: 0;
+        }
+
+        .contact a {
+            display: block;
+            padding: 10px 0;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>Company Contacts</h2>
+</header>
+
+<div class="container">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="🔍 Search name, department..."
+        onkeyup="searchContacts()"
+    >
+
+    <div id="contacts">
+
+        <div class="contact">
+            <h3>John Smith</h3>
+            <p>IT Department</p>
+            <a href="tel:0211234567">📞 021 123 4567</a>
+            <a href="mailto:john@example.com">✉️ john@example.com</a>
+        </div>
+
+        <div class="contact">
+            <h3>Sarah Jones</h3>
+            <p>Finance Department</p>
+            <a href="tel:0215551234">📞 021 555 1234</a>
+            <a href="mailto:sarah@example.com">✉️ sarah@example.com</a>
+        </div>
+
+        <div class="contact">
+            <h3>David Brown</h3>
+            <p>Operations Department</p>
+            <a href="tel:0218889999">📞 021 888 9999</a>
+            <a href="mailto:david@example.com">✉️ david@example.com</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+function searchContacts() {
+
+    let search = document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    let contacts = document
+        .getElementsByClassName("contact");
+
+    for (let i = 0; i < contacts.length; i++) {
+
+        let text = contacts[i].innerText.toLowerCase();
+
+        if (text.includes(search)) {
+            contacts[i].style.display = "block";
+        } else {
+            contacts[i].style.display = "none";
+        }
+    }
+}
+
+</script>
+
+</body>
+</html>
