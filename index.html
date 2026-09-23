@@ -7,17 +7,31 @@
     <title>Company Contacts</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+            background: #f2f4f7;
         }
 
         header {
-            background: #222;
+            background: #1f2937;
             color: white;
             padding: 20px;
             text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header p {
+            margin: 6px 0 0;
+            opacity: 0.8;
         }
 
         .container {
@@ -28,30 +42,56 @@
 
         #search {
             width: 100%;
-            padding: 14px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            padding: 15px;
             font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
             margin-bottom: 15px;
         }
 
         .contact {
             background: white;
+            border-radius: 12px;
             padding: 18px;
             margin-bottom: 12px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        .contact h3 {
-            margin-top: 0;
+        .contact h2 {
+            margin: 0 0 6px;
+            font-size: 20px;
         }
 
-        .contact a {
+        .department {
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .button {
             display: block;
-            padding: 10px 0;
             text-decoration: none;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .call {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        .email {
+            background: #e3f2fd;
+            color: #0d47a1;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #777;
+            display: none;
+            padding: 30px;
         }
     </style>
 </head>
@@ -59,7 +99,8 @@
 <body>
 
 <header>
-    <h2>Company Contacts</h2>
+    <h1>📱 Company Contacts</h1>
+    <p>Employee Directory</p>
 </header>
 
 <div class="container">
@@ -67,58 +108,95 @@
     <input
         type="text"
         id="search"
-        placeholder="🔍 Search name, department..."
+        placeholder="🔍 Search by name or department..."
         onkeyup="searchContacts()"
     >
 
     <div id="contacts">
 
         <div class="contact">
-            <h3>John Smith</h3>
-            <p>IT Department</p>
-            <a href="tel:0211234567">📞 021 123 4567</a>
-            <a href="mailto:john@example.com">✉️ john@example.com</a>
+            <h2>John Smith</h2>
+            <div class="department">IT Department</div>
+
+            <a class="button call" href="tel:0211234567">
+                📞 Call 021 123 4567
+            </a>
+
+            <a class="button email" href="mailto:john@example.com">
+                ✉️ Email John
+            </a>
         </div>
 
-        <div class="contact">
-            <h3>Sarah Jones</h3>
-            <p>Finance Department</p>
-            <a href="tel:0215551234">📞 021 555 1234</a>
-            <a href="mailto:sarah@example.com">✉️ sarah@example.com</a>
-        </div>
 
         <div class="contact">
-            <h3>David Brown</h3>
-            <p>Operations Department</p>
-            <a href="tel:0218889999">📞 021 888 9999</a>
-            <a href="mailto:david@example.com">✉️ david@example.com</a>
+            <h2>Sarah Jones</h2>
+            <div class="department">Finance Department</div>
+
+            <a class="button call" href="tel:0215551234">
+                📞 Call 021 555 1234
+            </a>
+
+            <a class="button email" href="mailto:sarah@example.com">
+                ✉️ Email Sarah
+            </a>
+        </div>
+
+
+        <div class="contact">
+            <h2>David Brown</h2>
+            <div class="department">Operations Department</div>
+
+            <a class="button call" href="tel:0218889999">
+                📞 Call 021 888 9999
+            </a>
+
+            <a class="button email" href="mailto:david@example.com">
+                ✉️ Email David
+            </a>
         </div>
 
     </div>
+
+    <div id="noResults" class="no-results">
+        No contacts found.
+    </div>
+
 </div>
+
 
 <script>
 
 function searchContacts() {
 
-    let search = document
-        .getElementById("search")
+    const searchText =
+        document.getElementById("search")
         .value
         .toLowerCase();
 
-    let contacts = document
-        .getElementsByClassName("contact");
+    const contacts =
+        document.getElementsByClassName("contact");
+
+    let found = 0;
 
     for (let i = 0; i < contacts.length; i++) {
 
-        let text = contacts[i].innerText.toLowerCase();
+        const contactText =
+            contacts[i].innerText.toLowerCase();
 
-        if (text.includes(search)) {
+        if (contactText.includes(searchText)) {
+
             contacts[i].style.display = "block";
+            found++;
+
         } else {
+
             contacts[i].style.display = "none";
+
         }
     }
+
+    document.getElementById("noResults").style.display =
+        found === 0 ? "block" : "none";
 }
 
 </script>
