@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,270 +15,455 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
+            font-family: Arial, sans-serif;
             background: #f4f6f8;
             color: #222;
         }
 
-        header {
-            background: #1f4e79;
-            color: white;
+        .container {
+            max-width: 900px;
+            margin: auto;
             padding: 20px;
-            text-align: center;
         }
 
-        header h1 {
-            margin: 0 0 15px;
+        /* LOGIN */
+
+        #loginScreen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
         .login-box {
-            max-width: 400px;
-            margin: 40px auto;
             background: white;
-            padding: 25px;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .login-box h1 {
+            margin-top: 0;
+            text-align: center;
         }
 
         .login-box input {
             width: 100%;
-            padding: 12px;
-            margin: 8px 0;
+            padding: 13px;
+            margin-bottom: 12px;
             border: 1px solid #ccc;
             border-radius: 7px;
             font-size: 16px;
         }
 
         button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
             border: none;
             border-radius: 7px;
-            font-size: 16px;
+            padding: 11px 16px;
             cursor: pointer;
+            font-size: 15px;
         }
 
         #loginButton {
-            background: #1f4e79;
+            width: 100%;
+            background: #0066cc;
             color: white;
+            font-weight: bold;
         }
 
-        #logoutButton {
-            width: auto;
-            background: #dc3545;
-            color: white;
-            padding: 8px 15px;
+        #loginButton:hover {
+            background: #0052a3;
         }
+
+        #loginMessage {
+            color: #c62828;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        /* APP */
 
         #app {
             display: none;
         }
 
-        #search {
-            width: 100%;
-            max-width: 500px;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        #contacts {
-            max-width: 700px;
-            margin: 20px auto;
-            padding: 0 15px;
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .user-email {
+            color: #666;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        #changePasswordButton {
+            background: #555;
+            color: white;
+        }
+
+        #logoutButton {
+            background: #c62828;
+            color: white;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
         }
 
         .contact {
             background: white;
             padding: 18px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
-        .contact h2 {
-            margin: 0 0 8px;
+        .contact h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
         }
 
         .contact p {
             margin: 6px 0;
         }
 
-        .buttons {
+        .contact-buttons {
             display: flex;
             gap: 10px;
             margin-top: 12px;
         }
 
-        .buttons a {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            border-radius: 7px;
-            text-decoration: none;
+        .call-button {
+            background: #2e7d32;
             color: white;
         }
 
-        .call {
-            background: #198754;
+        .email-button {
+            background: #1565c0;
+            color: white;
         }
 
-        .email {
-            background: #0d6efd;
-        }
-
-        #message {
+        #status {
             text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        /* PASSWORD MODAL */
+
+        #passwordModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
             padding: 20px;
         }
 
-        .error {
-            color: #dc3545;
-            text-align: center;
-            margin-top: 10px;
+        .modal-box {
+            background: white;
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 25px;
+            border-radius: 12px;
         }
 
-        .user-info {
-            margin-top: 10px;
+        .modal-box h2 {
+            margin-top: 0;
+        }
+
+        .modal-box input {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        #savePasswordButton {
+            background: #0066cc;
+            color: white;
+        }
+
+        #cancelPasswordButton {
+            background: #777;
+            color: white;
+        }
+
+        #passwordMessage {
+            margin-top: 12px;
             font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 12px;
+            }
+
+            .header-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-buttons {
+                width: 100%;
+            }
+
+            .header-buttons button {
+                flex: 1;
+            }
+
+            .contact-buttons button {
+                flex: 1;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<!-- LOGIN SCREEN -->
+    <!-- LOGIN SCREEN -->
 
-<div id="loginScreen">
+    <div id="loginScreen">
 
-    <header>
-        <h1>Company Contacts</h1>
-    </header>
+        <div class="login-box">
 
-    <div class="login-box">
+            <h1>Company Contacts</h1>
 
-        <h2>Sign in</h2>
+            <input
+                type="email"
+                id="email"
+                placeholder="Username / Email"
+                autocomplete="username"
+            >
 
-        <p>
-            Use your company contact-directory account.
-        </p>
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                autocomplete="current-password"
+            >
 
-        <input
-            type="email"
-            id="email"
-            placeholder="Email address"
-        >
-
-        <input
-            type="password"
-            id="password"
-            placeholder="Password"
-        >
-
-        <button id="loginButton">
-            Sign In
-        </button>
-
-        <div id="loginMessage" class="error"></div>
-
-    </div>
-
-</div>
-
-
-<!-- CONTACT APPLICATION -->
-
-<div id="app">
-
-    <header>
-
-        <h1>Company Contacts</h1>
-
-        <input
-            type="text"
-            id="search"
-            placeholder="Search name, phone or email..."
-        >
-
-        <div class="user-info">
-            <span id="userEmail"></span>
-            <br>
-            <button id="logoutButton">
-                Sign Out
+            <button id="loginButton">
+                Login
             </button>
+
+            <div id="loginMessage"></div>
+
         </div>
 
-    </header>
-
-    <div id="message">
-        Loading contacts...
     </div>
 
-    <div id="contacts"></div>
 
-</div>
+    <!-- MAIN APPLICATION -->
+
+    <div id="app">
+
+        <div class="container">
+
+            <div class="header">
+
+                <div class="header-top">
+
+                    <div>
+                        <h1>Company Contacts</h1>
+
+                        <div class="user-email">
+                            Logged in as:
+                            <span id="userEmail"></span>
+                        </div>
+                    </div>
+
+                    <div class="header-buttons">
+
+                        <button id="changePasswordButton">
+                            Change Password
+                        </button>
+
+                        <button id="logoutButton">
+                            Logout
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
 
 
-<script>
+            <div class="search-box">
 
-    // ==========================================
-    // SUPABASE CONNECTION
-    // ==========================================
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search contacts..."
+                >
 
-    const SUPABASE_URL =
-        "https://vibymndzvwgrtcybipth.supabase.co";
-
-    const SUPABASE_KEY =
-        "sb_publishable_gx-fEK-9lLgzsuR-coLMZg_HIbTf3o1";
+            </div>
 
 
-    const supabaseClient =
-        supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
+            <div id="status">
+                Loading contacts...
+            </div>
 
 
-    let allContacts = [];
+            <div id="contactsList"></div>
+
+        </div>
+
+    </div>
 
 
-    // ==========================================
-    // LOGIN
-    // ==========================================
+    <!-- CHANGE PASSWORD MODAL -->
 
-    document
-        .getElementById("loginButton")
-        .addEventListener("click", async function () {
+    <div id="passwordModal">
+
+        <div class="modal-box">
+
+            <h2>Change Password</h2>
+
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="New password"
+                autocomplete="new-password"
+            >
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm new password"
+                autocomplete="new-password"
+            >
+
+            <div class="modal-buttons">
+
+                <button id="savePasswordButton">
+                    Save Password
+                </button>
+
+                <button id="cancelPasswordButton">
+                    Cancel
+                </button>
+
+            </div>
+
+            <div id="passwordMessage"></div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // ==========================================
+        // SUPABASE SETTINGS
+        // ==========================================
+
+        const SUPABASE_URL =
+            "https://vibymndzvwgrtcybipth.supabase.co";
+
+        const SUPABASE_KEY =
+            "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
+
+
+        const supabaseClient =
+            supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        let allContacts = [];
+
+
+        // ==========================================
+        // LOGIN
+        // ==========================================
+
+        document
+            .getElementById("loginButton")
+            .addEventListener("click", login);
+
+
+        async function login() {
 
             const email =
-                document.getElementById("email").value.trim();
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
 
             const password =
-                document.getElementById("password").value;
+                document
+                    .getElementById("password")
+                    .value;
+
+            const message =
+                document.getElementById("loginMessage");
+
+
+            message.textContent = "";
 
 
             if (!email || !password) {
 
-                document.getElementById("loginMessage")
-                    .textContent =
+                message.textContent =
                     "Please enter your email and password.";
 
                 return;
             }
 
 
-            document.getElementById("loginMessage")
-                .textContent = "Signing in...";
-
-
             const { data, error } =
                 await supabaseClient.auth.signInWithPassword({
 
                     email: email,
-
                     password: password
 
                 });
@@ -285,247 +471,441 @@
 
             if (error) {
 
-                console.error(error);
-
-                document.getElementById("loginMessage")
-                    .textContent =
-                    "Invalid email or password.";
+                message.textContent =
+                    error.message;
 
                 return;
-
             }
 
 
             showApplication(data.user);
-
-        });
-
-
-    // ==========================================
-    // LOGOUT
-    // ==========================================
-
-    document
-        .getElementById("logoutButton")
-        .addEventListener("click", async function () {
-
-            await supabaseClient.auth.signOut();
-
-            location.reload();
-
-        });
-
-
-    // ==========================================
-    // CHECK EXISTING LOGIN
-    // ==========================================
-
-    async function checkSession() {
-
-        const {
-            data: { session }
-        } = await supabaseClient.auth.getSession();
-
-
-        if (session) {
-
-            showApplication(session.user);
-
         }
 
-    }
+
+        // Allow Enter key to login
+
+        document
+            .getElementById("password")
+            .addEventListener("keydown", function(event) {
+
+                if (event.key === "Enter") {
+
+                    login();
+
+                }
+
+            });
 
 
-    // ==========================================
-    // SHOW APPLICATION
-    // ==========================================
+        // ==========================================
+        // SHOW APPLICATION
+        // ==========================================
 
-    function showApplication(user) {
+        function showApplication(user) {
 
-        document.getElementById("loginScreen")
-            .style.display = "none";
+            document
+                .getElementById("loginScreen")
+                .style.display = "none";
 
-        document.getElementById("app")
-            .style.display = "block";
+            document
+                .getElementById("app")
+                .style.display = "block";
 
-        document.getElementById("userEmail")
-            .textContent = user.email;
+            document
+                .getElementById("userEmail")
+                .textContent = user.email;
 
-        loadContacts();
-
-    }
-
-
-    // ==========================================
-    // LOAD CONTACTS
-    // ==========================================
-
-    async function loadContacts() {
-
-        const { data, error } =
-            await supabaseClient
-                .from("contacts")
-                .select("*")
-                .order("name");
+            loadContacts();
+        }
 
 
-        if (error) {
+        // ==========================================
+        // CHECK EXISTING SESSION
+        // ==========================================
 
-            console.error(error);
+        async function checkSession() {
 
-            document.getElementById("message")
-                .textContent =
-                "Unable to load contacts.";
+            const { data } =
+                await supabaseClient.auth.getSession();
 
-            return;
+
+            if (data.session) {
+
+                showApplication(
+                    data.session.user
+                );
+
+            }
 
         }
 
 
-        allContacts = data;
+        // ==========================================
+        // LOGOUT
+        // ==========================================
 
-        displayContacts(allContacts);
+        document
+            .getElementById("logoutButton")
+            .addEventListener("click", async function() {
 
-    }
+                await supabaseClient.auth.signOut();
 
+                location.reload();
 
-    // ==========================================
-    // DISPLAY CONTACTS
-    // ==========================================
-
-    function displayContacts(contacts) {
-
-        const container =
-            document.getElementById("contacts");
-
-        container.innerHTML = "";
+            });
 
 
-        document.getElementById("message")
-            .textContent =
-            contacts.length + " contact(s)";
+        // ==========================================
+        // LOAD CONTACTS
+        // ==========================================
+
+        async function loadContacts() {
+
+            const status =
+                document.getElementById("status");
 
 
-        contacts.forEach(contact => {
-
-            const card =
-                document.createElement("div");
-
-            card.className = "contact";
-
-
-            card.innerHTML = `
-
-                <h2>
-                    ${escapeHtml(contact.name || "")}
-                </h2>
-
-                <p>
-                    📞 ${escapeHtml(contact.phone || "No phone")}
-                </p>
-
-                <p>
-                    ✉️ ${escapeHtml(contact.email || "No email")}
-                </p>
-
-                <div class="buttons">
-
-                    ${
-                        contact.phone
-                        ? `<a class="call"
-                            href="tel:${encodeURIComponent(contact.phone)}">
-                            📞 Call
-                           </a>`
-                        : ""
-                    }
-
-                    ${
-                        contact.email
-                        ? `<a class="email"
-                            href="mailto:${encodeURIComponent(contact.email)}">
-                            ✉️ Email
-                           </a>`
-                        : ""
-                    }
-
-                </div>
-
-            `;
+            const { data, error } =
+                await supabaseClient
+                    .from("contacts")
+                    .select("*")
+                    .order("name");
 
 
-            container.appendChild(card);
+            if (error) {
 
-        });
+                status.textContent =
+                    "Unable to load contacts: " +
+                    error.message;
 
-    }
-
-
-    // ==========================================
-    // SEARCH
-    // ==========================================
-
-    document
-        .getElementById("search")
-        .addEventListener("input", function () {
-
-            const searchText =
-                this.value.toLowerCase().trim();
+                return;
+            }
 
 
-            const filtered =
-                allContacts.filter(contact => {
+            allContacts = data || [];
 
-                    return (
-
-                        (contact.name || "")
-                            .toLowerCase()
-                            .includes(searchText)
-
-                        ||
-
-                        (contact.phone || "")
-                            .toLowerCase()
-                            .includes(searchText)
-
-                        ||
-
-                        (contact.email || "")
-                            .toLowerCase()
-                            .includes(searchText)
-
-                    );
-
-                });
+            displayContacts(allContacts);
+        }
 
 
-            displayContacts(filtered);
+        // ==========================================
+        // DISPLAY CONTACTS
+        // ==========================================
 
-        });
+        function displayContacts(contacts) {
 
+            const list =
+                document.getElementById("contactsList");
 
-    // ==========================================
-    // SECURITY
-    // ==========================================
-
-    function escapeHtml(text) {
-
-        const div =
-            document.createElement("div");
-
-        div.textContent = text;
-
-        return div.innerHTML;
-
-    }
+            const status =
+                document.getElementById("status");
 
 
-    // ==========================================
-    // START
-    // ==========================================
+            list.innerHTML = "";
 
-    checkSession();
 
-</script>
+            if (!contacts.length) {
+
+                status.textContent =
+                    "No contacts found.";
+
+                return;
+            }
+
+
+            status.textContent =
+                contacts.length +
+                " contact(s)";
+
+
+            contacts.forEach(function(contact) {
+
+                const div =
+                    document.createElement("div");
+
+                div.className = "contact";
+
+
+                const name =
+                    document.createElement("h3");
+
+                name.textContent =
+                    contact.name || "";
+
+
+                const phone =
+                    document.createElement("p");
+
+                phone.textContent =
+                    "Phone: " +
+                    (contact.phone || "");
+
+
+                const email =
+                    document.createElement("p");
+
+                email.textContent =
+                    "Email: " +
+                    (contact.email || "");
+
+
+                const buttons =
+                    document.createElement("div");
+
+                buttons.className =
+                    "contact-buttons";
+
+
+                if (contact.phone) {
+
+                    const call =
+                        document.createElement("a");
+
+                    call.href =
+                        "tel:" +
+                        contact.phone.replace(
+                            /[^0-9+]/g,
+                            ""
+                        );
+
+                    call.textContent =
+                        "Call";
+
+                    call.className =
+                        "call-button";
+
+                    call.style.textDecoration =
+                        "none";
+
+                    call.style.padding =
+                        "11px 16px";
+
+                    call.style.borderRadius =
+                        "7px";
+
+                    buttons.appendChild(call);
+
+                }
+
+
+                if (contact.email) {
+
+                    const mail =
+                        document.createElement("a");
+
+                    mail.href =
+                        "mailto:" +
+                        contact.email;
+
+                    mail.textContent =
+                        "Email";
+
+                    mail.className =
+                        "email-button";
+
+                    mail.style.textDecoration =
+                        "none";
+
+                    mail.style.padding =
+                        "11px 16px";
+
+                    mail.style.borderRadius =
+                        "7px";
+
+                    buttons.appendChild(mail);
+
+                }
+
+
+                div.appendChild(name);
+                div.appendChild(phone);
+                div.appendChild(email);
+                div.appendChild(buttons);
+
+                list.appendChild(div);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // SEARCH
+        // ==========================================
+
+        document
+            .getElementById("searchInput")
+            .addEventListener("input", function() {
+
+                const search =
+                    this.value
+                        .toLowerCase()
+                        .trim();
+
+
+                const filtered =
+                    allContacts.filter(function(contact) {
+
+                        return (
+
+                            (contact.name || "")
+                                .toLowerCase()
+                                .includes(search)
+
+                            ||
+
+                            (contact.phone || "")
+                                .toLowerCase()
+                                .includes(search)
+
+                            ||
+
+                            (contact.email || "")
+                                .toLowerCase()
+                                .includes(search)
+
+                        );
+
+                    });
+
+
+                displayContacts(filtered);
+
+            });
+
+
+        // ==========================================
+        // CHANGE PASSWORD
+        // ==========================================
+
+        document
+            .getElementById("changePasswordButton")
+            .addEventListener("click", function() {
+
+                document
+                    .getElementById("passwordModal")
+                    .style.display = "block";
+
+                document
+                    .getElementById("newPassword")
+                    .value = "";
+
+                document
+                    .getElementById("confirmPassword")
+                    .value = "";
+
+                document
+                    .getElementById("passwordMessage")
+                    .textContent = "";
+
+            });
+
+
+        // Close password window
+
+        document
+            .getElementById("cancelPasswordButton")
+            .addEventListener("click", function() {
+
+                document
+                    .getElementById("passwordModal")
+                    .style.display = "none";
+
+            });
+
+
+        // Save new password
+
+        document
+            .getElementById("savePasswordButton")
+            .addEventListener("click", async function() {
+
+                const newPassword =
+                    document
+                        .getElementById("newPassword")
+                        .value;
+
+                const confirmPassword =
+                    document
+                        .getElementById("confirmPassword")
+                        .value;
+
+                const message =
+                    document
+                        .getElementById("passwordMessage");
+
+
+                message.textContent = "";
+
+
+                if (!newPassword ||
+                    !confirmPassword) {
+
+                    message.textContent =
+                        "Please enter the new password.";
+
+                    return;
+                }
+
+
+                if (newPassword !== confirmPassword) {
+
+                    message.textContent =
+                        "Passwords do not match.";
+
+                    return;
+                }
+
+
+                if (newPassword.length < 8) {
+
+                    message.textContent =
+                        "Password must be at least 8 characters.";
+
+                    return;
+                }
+
+
+                const { error } =
+                    await supabaseClient.auth.updateUser({
+
+                        password: newPassword
+
+                    });
+
+
+                if (error) {
+
+                    message.textContent =
+                        error.message;
+
+                    return;
+                }
+
+
+                message.textContent =
+                    "Password changed successfully.";
+
+
+                document
+                    .getElementById("newPassword")
+                    .value = "";
+
+                document
+                    .getElementById("confirmPassword")
+                    .value = "";
+
+            });
+
+
+        // ==========================================
+        // START APPLICATION
+        // ==========================================
+
+        checkSession();
+
+    </script>
 
 </body>
 </html>
+```
