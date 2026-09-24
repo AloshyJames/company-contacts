@@ -6,92 +6,89 @@
 
     <title>Company Contacts</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         * {
             box-sizing: border-box;
         }
 
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: #f2f4f7;
+            margin: 0;
+            background: #f4f6f8;
+            color: #222;
         }
 
         header {
-            background: #1f2937;
+            background: #1f4e79;
             color: white;
             padding: 20px;
             text-align: center;
         }
 
         header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        header p {
-            margin: 6px 0 0;
-            opacity: 0.8;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 15px;
+            margin: 0 0 12px;
         }
 
         #search {
             width: 100%;
-            padding: 15px;
+            max-width: 500px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
             font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            margin-bottom: 15px;
+        }
+
+        #contacts {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 0 15px;
         }
 
         .contact {
             background: white;
-            border-radius: 12px;
             padding: 18px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
+            border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .contact h2 {
-            margin: 0 0 6px;
+            margin: 0 0 8px;
             font-size: 20px;
         }
 
-        .department {
-            color: #666;
-            margin-bottom: 12px;
+        .contact p {
+            margin: 6px 0;
         }
 
-        .button {
-            display: block;
-            text-decoration: none;
-            padding: 12px;
-            margin-top: 8px;
-            border-radius: 8px;
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .buttons a {
+            flex: 1;
             text-align: center;
-            font-weight: bold;
+            padding: 10px;
+            border-radius: 7px;
+            text-decoration: none;
+            color: white;
         }
 
         .call {
-            background: #e8f5e9;
-            color: #1b5e20;
+            background: #198754;
         }
 
         .email {
-            background: #e3f2fd;
-            color: #0d47a1;
+            background: #0d6efd;
         }
 
-        .no-results {
+        #message {
             text-align: center;
-            color: #777;
-            display: none;
-            padding: 30px;
+            padding: 20px;
         }
     </style>
 </head>
@@ -99,105 +96,176 @@
 <body>
 
 <header>
-    <h1>📱 Company Contacts</h1>
-    <p>Employee Directory</p>
-</header>
-
-<div class="container">
-
+    <h1>Company Contacts</h1>
     <input
         type="text"
         id="search"
-        placeholder="🔍 Search by name or department..."
-        onkeyup="searchContacts()"
+        placeholder="Search name, department, phone..."
     >
+</header>
 
-    <div id="contacts">
+<div id="message">Loading contacts...</div>
 
-        <div class="contact">
-            <h2>John Smith</h2>
-            <div class="department">IT Department</div>
-
-            <a class="button call" href="tel:0211234567">
-                📞 Call 021 123 4567
-            </a>
-
-            <a class="button email" href="mailto:john@example.com">
-                ✉️ Email John
-            </a>
-        </div>
-
-
-        <div class="contact">
-            <h2>Sarah Jones</h2>
-            <div class="department">Finance Department</div>
-
-            <a class="button call" href="tel:0215551234">
-                📞 Call 021 555 1234
-            </a>
-
-            <a class="button email" href="mailto:sarah@example.com">
-                ✉️ Email Sarah
-            </a>
-        </div>
-
-
-        <div class="contact">
-            <h2>David Brown</h2>
-            <div class="department">Operations Department</div>
-
-            <a class="button call" href="tel:0218889999">
-                📞 Call 021 888 9999
-            </a>
-
-            <a class="button email" href="mailto:david@example.com">
-                ✉️ Email David
-            </a>
-        </div>
-
-    </div>
-
-    <div id="noResults" class="no-results">
-        No contacts found.
-    </div>
-
-</div>
-
+<div id="contacts"></div>
 
 <script>
 
-function searchContacts() {
+    // ==========================================
+    // PUT YOUR SUPABASE DETAILS HERE
+    // ==========================================
 
-    const searchText =
-        document.getElementById("search")
-        .value
-        .toLowerCase();
+    const SUPABASE_URL = "https://vibymndzvwgrtcybipth.supabase.co/rest/v1/";
 
-    const contacts =
-        document.getElementsByClassName("contact");
+    const SUPABASE_KEY = "sb_publishable_gx-fEK-9lLgzsuR-coLMZg_HIbTf3o1";
 
-    let found = 0;
 
-    for (let i = 0; i < contacts.length; i++) {
+    // ==========================================
+    // CONNECT TO SUPABASE
+    // ==========================================
 
-        const contactText =
-            contacts[i].innerText.toLowerCase();
+    const supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
-        if (contactText.includes(searchText)) {
 
-            contacts[i].style.display = "block";
-            found++;
+    let allContacts = [];
 
-        } else {
 
-            contacts[i].style.display = "none";
+    // ==========================================
+    // LOAD CONTACTS
+    // ==========================================
 
+    async function loadContacts() {
+
+        const { data, error } = await supabaseClient
+            .from("contacts")
+            .select("*")
+            .order("name");
+
+        if (error) {
+
+            console.error(error);
+
+            document.getElementById("message").textContent =
+                "Unable to load contacts.";
+
+            return;
         }
+
+        allContacts = data;
+
+        displayContacts(allContacts);
     }
 
-    document.getElementById("noResults").style.display =
-        found === 0 ? "block" : "none";
-}
+
+    // ==========================================
+    // DISPLAY CONTACTS
+    // ==========================================
+
+    function displayContacts(contacts) {
+
+        const container = document.getElementById("contacts");
+
+        container.innerHTML = "";
+
+        document.getElementById("message").textContent =
+            contacts.length + " contact(s)";
+
+
+        contacts.forEach(contact => {
+
+            const card = document.createElement("div");
+
+            card.className = "contact";
+
+            card.innerHTML = `
+
+                <h2>${escapeHtml(contact.name || "")}</h2>
+
+                <p>
+                    📞 ${escapeHtml(contact.phone || "No phone")}
+                </p>
+
+                <p>
+                    ✉️ ${escapeHtml(contact.email || "No email")}
+                </p>
+
+                <div class="buttons">
+
+                    ${
+                        contact.phone
+                        ? `<a class="call"
+                             href="tel:${encodeURIComponent(contact.phone)}">
+                             Call
+                           </a>`
+                        : ""
+                    }
+
+                    ${
+                        contact.email
+                        ? `<a class="email"
+                             href="mailto:${encodeURIComponent(contact.email)}">
+                             Email
+                           </a>`
+                        : ""
+                    }
+
+                </div>
+            `;
+
+            container.appendChild(card);
+
+        });
+    }
+
+
+    // ==========================================
+    // SEARCH
+    // ==========================================
+
+    document.getElementById("search").addEventListener(
+        "input",
+        function () {
+
+            const searchText =
+                this.value.toLowerCase().trim();
+
+            const filtered = allContacts.filter(contact => {
+
+                return (
+                    (contact.name || "").toLowerCase().includes(searchText) ||
+                    (contact.phone || "").toLowerCase().includes(searchText) ||
+                    (contact.email || "").toLowerCase().includes(searchText)
+                );
+
+            });
+
+            displayContacts(filtered);
+
+        }
+    );
+
+
+    // ==========================================
+    // SECURITY
+    // ==========================================
+
+    function escapeHtml(text) {
+
+        const div = document.createElement("div");
+
+        div.textContent = text;
+
+        return div.innerHTML;
+    }
+
+
+    // ==========================================
+    // START
+    // ==========================================
+
+    loadContacts();
 
 </script>
 
